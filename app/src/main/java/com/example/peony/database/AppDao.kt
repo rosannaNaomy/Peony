@@ -1,9 +1,8 @@
 package com.example.peony.database
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.lifecycle.LiveData
+import androidx.room.*
+import com.example.peony.model.RepositoryData
 
 @Dao
 interface AppDao {
@@ -21,5 +20,14 @@ interface AppDao {
     //insert a record, which will take user input
     @Insert
     fun insertRecord(userEntity: UserEntity)
+
+    @Query("SELECT * FROM med ORDER BY id DESC")
+    fun getMedData(): LiveData<List<RepositoryData>>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertMedData(repositoryData: RepositoryData)
+
+    @Query("DELETE FROM med")
+    fun deleteAllMedData()
 
 }
