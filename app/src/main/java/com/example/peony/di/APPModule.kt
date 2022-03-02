@@ -1,5 +1,6 @@
 package com.example.peony.di
 
+import android.app.Application
 import android.content.Context
 import com.example.peony.database.AppDao
 import com.example.peony.database.AppDatabase
@@ -15,7 +16,7 @@ object APPModule {
 
     @Singleton
     @Provides //returns instance of database, pass context
-    fun getAppDB(context: Context):AppDatabase{
+    fun getAppDB(context: Application):AppDatabase{
         return AppDatabase.getAppDB(context)
     }
 
