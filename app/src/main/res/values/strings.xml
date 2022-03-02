@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Peony</string>
+    <string name="editText_Hint">Enter Description</string>
+    <string name="save_button">SAVE</string>
 </resources>
