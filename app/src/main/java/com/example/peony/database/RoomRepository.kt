@@ -15,4 +15,11 @@ class RoomRepository @Inject constructor(private val appDao: AppDao) {
         appDao.insertRecord(userEntity)
     }
 
+    fun deleteUser(userEntity: UserEntity){
+        appDao.deleteUser(userEntity)
+    }
+
+    fun deleteAllUsers(){
+        appDao.deleteAllUsers()
+    }
 }

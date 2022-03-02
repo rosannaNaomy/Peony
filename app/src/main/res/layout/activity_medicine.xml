@@ -10,31 +10,60 @@
         android:id="@+id/enterDescription_editText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="20dp"
         android:hint="@string/editText_Hint"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_margin="20dp"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/deleteAll_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="8dp"
+        android:text="Delete All"
+        app:layout_constraintBottom_toTopOf="@+id/result_textView"
+        app:layout_constraintEnd_toStartOf="@+id/saveButton"
+        app:layout_constraintHorizontal_bias="0.639"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/enterDescription_editText"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/saveButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/enterDescription_editText"
+        android:layout_margin="20dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="8dp"
         android:text="@string/save_button"
-        android:layout_margin="20dp"/>
+        app:layout_constraintBottom_toTopOf="@+id/result_textView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.743"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/enterDescription_editText" />
 
     <TextView
         android:id="@+id/result_textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/saveButton"
-        android:textSize="20sp"
+        android:layout_margin="10dp"
         android:textColor="@color/black"
+        android:textSize="20sp"
         android:textStyle="bold"
-        android:layout_margin="10dp"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/saveButton" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/result_textView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_margin="10dp"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

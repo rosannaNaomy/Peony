@@ -34,4 +34,14 @@ class MedicineActivityViewModel @Inject constructor(private val repository: Room
         repository.insertRecord(userEntity)
         loadRecords()
     }
+
+    fun deleteUser(userEntity: UserEntity){
+        repository.deleteUser(userEntity)
+        loadRecords()
+    }
+
+    fun deleteAllUsers(){
+        repository.deleteAllUsers()
+        loadRecords()
+    }
 }
