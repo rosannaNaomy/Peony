@@ -7,4 +7,4 @@ The goal of this app is to allow users to search/save a medication to track side
 - Room persistence library for data persistance
 - Hilt for dependecy injection
 - MVVM
-- Retrofit
+- Retrofit - API used - [OpendFDA](https://open.fda.gov/apis/)
