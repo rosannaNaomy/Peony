@@ -1,33 +1,44 @@
 package com.example.peony.database
 
-import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.example.peony.model.RepositoryData
+import androidx.room.Dao
+import androidx.room.Insert
+import com.example.peony.database.entities.MedicationData
+import com.example.peony.database.entities.UserEntity
+import com.example.peony.database.entities.relations.UserWithMedication
 
 @Dao
 interface AppDao {
 
     //pass entity, table name user, order by desc, new records will show on top
-    @Query("SELECT * FROM user ORDER BY id DESC")
-    fun getRecords(): List<UserEntity>
+//    @Query("SELECT * FROM user ORDER BY id DESC")
+//    fun getRecords(): List<UserEntity>
 
-    @Delete
-    fun deleteUser(userEntity: UserEntity)
-
-    @Query("DELETE FROM user")
-    fun deleteAllUsers()
+//    @Delete
+//    fun deleteUser(userEntity: UserEntity)
+//
+//    @Query("DELETE FROM user")
+//    fun deleteAllUsers()
 
     //insert a record, which will take user input
-    @Insert
-    fun insertRecord(userEntity: UserEntity)
-
-    @Query("SELECT * FROM med ORDER BY id DESC")
-    fun getMedData(): LiveData<List<RepositoryData>>
+//    @Insert(onConflict = onConflictStrategy.REPLACE)
+//    fun insertUser(userEntity: UserEntity)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertMedData(repositoryData: RepositoryData)
+    suspend fun insertMed(medicationData: MedicationData)
 
     @Query("DELETE FROM med")
-    fun deleteAllMedData()
+    suspend fun deleteAllMeds()
+
+//    @Transaction
+//    @Query("SELECT * FROM user WHERE userName = :userName")
+//    suspend fun getUserAndMedWithUserName(userName: String): List<UserWithMedication>
+
+    @Query("SELECT * FROM med ORDER BY brand_name DESC")
+    suspend fun getMeds(): List<MedicationData>
+
+//    @Transaction
+//    @Query("SELECT * FROM user WHERE userName = :userName")
+//    fun getUserWithUserMeds(userName: String): List<UserWithMedication>
 
 }

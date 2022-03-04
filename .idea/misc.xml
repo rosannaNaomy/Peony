@@ -5,9 +5,9 @@
       <map>
         <entry key="app/src/main/res/layout/activity_display_medicine.xml" value="0.33311767578124996" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.17864583333333334" />
-        <entry key="app/src/main/res/layout/activity_medicine.xml" value="0.22979583740234377" />
-        <entry key="app/src/main/res/layout/list_row.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/med_item.xml" value="0.25535888671875" />
+        <entry key="app/src/main/res/layout/activity_medicine.xml" value="0.2488967895507812" />
+        <entry key="app/src/main/res/layout/list_row.xml" value="0.19943237304687508" />
+        <entry key="app/src/main/res/layout/med_item.xml" value="0.2998718261718749" />
       </map>
     </option>
   </component>
