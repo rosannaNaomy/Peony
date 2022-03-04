@@ -49,17 +49,26 @@ class RoomRepository @Inject constructor(private val retroServiceInterface: Retr
 //    }
 
     fun makeApiCall(query: String){
+        val searchFieldQuery = "openfda.brand_name:\"$query\"" //This could become a user input searchable field, right now it is static
+        val filter = HashMap<String, String>() //Query map
+        filter["api_key"] = apiKey
+        filter["search"] = searchFieldQuery
+        filter["limit"] = "5"
+
         CoroutineScope(IO).launch{
             Log.d("RoomRepository", "Inside Api call, Query: $query")
-            val response = retroServiceInterface.getDataFromAPI(apiKey, query)
-            val jObjError = JSONObject(response.errorBody()!!.string())
-            Log.d("RoomRepository", "Error Response: ${response.errorBody()} $jObjError")
+            val response = retroServiceInterface.getDataFromAPI(filter)
+//            val jObjError = JSONObject(response.errorBody()!!.string()) // returns response errorbody message
+            Log.d("RoomRepository", "Error Response: ${response.errorBody()}")
             if(response.isSuccessful){
                 Log.d("RoomRepository", "apiCallSuccessful: $response")
+                Log.d("RoomRepository", "Check for data: ${response.body()!!.results.size}")
+                Log.d("RoomRepository", "Check for data: ${response.body()!!.results[0].openfda.brand_name}")
+                Log.d("RoomRepository", "Check for data: ${response.body()!!.results[1].openfda.brand_name}")
                 appDao.deleteAllMeds()
-                response.body()?.items?.forEach {
-                insertMed(it)
-                }
+//                response.body()?.results?.forEach {
+//                insertMed(it)
+//                }
             }
         }
     }
