@@ -1,5 +1,6 @@
 package com.example.peony.view
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -15,23 +16,23 @@ import javax.inject.Inject
 class MedicineActivityViewModel @Inject constructor(private val repository: RoomRepository): ViewModel(){
 
     //define viewmodel
-    lateinit var medData: MutableLiveData<List<MedicationData>>
+    //lateinit var medData: MutableLiveData<List<MedicationData>>
 
     //initialize livedata
-    init{
-        medData = MutableLiveData()
-        GlobalScope.launch {  loadRecords() }
-    }
+//    init{
+//        medData = MutableLiveData()
+//       // GlobalScope.launch {  loadRecords() }
+//    }
 
-    fun getRecordsObserver(): MutableLiveData<List<MedicationData>>{
-        return medData
+    fun getRecordsObserver(): LiveData<List<MedicationData>>{
+        return repository.getMeds()
     }
 
     //call function from repository
-    suspend fun loadRecords(){
-        val list = repository.getMeds()
-        medData.postValue(list)
-    }
+//    suspend fun loadRecords(){
+//        val list = repository.getMeds()
+//        medData.postValue(list)
+//    }
 
     //after inserting make db call
 //    fun insertUser(userEntity: UserEntity){

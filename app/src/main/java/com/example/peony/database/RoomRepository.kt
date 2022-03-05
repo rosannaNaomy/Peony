@@ -1,6 +1,7 @@
 package com.example.peony.database
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import com.example.peony.database.entities.MedicationData
 import com.example.peony.network.RetroServiceInterface
 import kotlinx.coroutines.CoroutineScope
@@ -27,7 +28,7 @@ class RoomRepository @Inject constructor(private val retroServiceInterface: Retr
 //        return appDao.getUserWithUserMeds(userName)
 //    }
 
-    suspend fun getMeds(): List<MedicationData>{
+    fun getMeds(): LiveData<List<MedicationData>>{
         return appDao.getMeds()
     }
 
@@ -61,14 +62,14 @@ class RoomRepository @Inject constructor(private val retroServiceInterface: Retr
 //            val jObjError = JSONObject(response.errorBody()!!.string()) // returns response errorbody message
             Log.d("RoomRepository", "Error Response: ${response.errorBody()}")
             if(response.isSuccessful){
+                appDao.deleteAllMeds()
                 Log.d("RoomRepository", "apiCallSuccessful: $response")
                 Log.d("RoomRepository", "Check for data: ${response.body()!!.results.size}")
-                Log.d("RoomRepository", "Check for data: ${response.body()!!.results[0].openfda.brand_name}")
+                Log.d("RoomRepository", "Check for data: ${response.body()!!.results[0].drug_interactions[0]}")
                 Log.d("RoomRepository", "Check for data: ${response.body()!!.results[1].openfda.brand_name}")
-                appDao.deleteAllMeds()
-//                response.body()?.results?.forEach {
-//                insertMed(it)
-//                }
+                response.body()?.results?.forEach {
+                    insertMed(MedicationData(result = response.body()!!.results, opendfda = it.openfda))
+                }
             }
         }
     }

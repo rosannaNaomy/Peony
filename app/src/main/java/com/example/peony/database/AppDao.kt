@@ -1,5 +1,6 @@
 package com.example.peony.database
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 import androidx.room.Dao
 import androidx.room.Insert
@@ -34,8 +35,8 @@ interface AppDao {
 //    @Query("SELECT * FROM user WHERE userName = :userName")
 //    suspend fun getUserAndMedWithUserName(userName: String): List<UserWithMedication>
 
-    @Query("SELECT * FROM med ORDER BY brand_name DESC")
-    suspend fun getMeds(): List<MedicationData>
+    @Query("SELECT * FROM med")
+    fun getMeds(): LiveData<List<MedicationData>>
 
 //    @Transaction
 //    @Query("SELECT * FROM user WHERE userName = :userName")

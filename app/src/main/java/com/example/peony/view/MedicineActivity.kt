@@ -35,22 +35,10 @@ class MedicineActivity : AppCompatActivity() {
 //        }
 
      //   deleteAll_button.setOnClickListener { viewModel.deleteAllUsers() }
-        //initVM()
         initViewModel()
         initMainViewModel()
     }
 
-//    private fun initVM(){
-//        viewModel = ViewModelProvider(this).get(MedicineActivityViewModel::class.java)
-////        viewModel.getRecordsObserver().observe(this, object : Observer<List<MedicationData>>{
-////            override fun onChanged(t: List<MedicationData>?) {
-////                result_textView.setText("")
-////                t?.forEach {
-////                    result_textView.append(it.brand_name + "\n")
-////                }
-////            }
-////        })
-//    }
 
     private fun initViewModel(){
         viewModel = ViewModelProvider(this).get(MedicineActivityViewModel::class.java)
