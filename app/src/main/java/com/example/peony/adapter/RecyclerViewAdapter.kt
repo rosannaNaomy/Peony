@@ -1,5 +1,6 @@
 package com.example.peony.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,11 +27,15 @@ class RecyclerViewAdapter(): RecyclerView.Adapter<RecyclerViewAdapter.MyViewHold
     }
 
     override fun onBindViewHolder(holder: RecyclerViewAdapter.MyViewHolder, position: Int) {
+        Log.d("RecyclerAdapter", "onBindViewholder Position: $position")
+//        Log.d("RecyclerAdapter", "onBindViewholder opendfda: ${listData?.get(position)?.opendfda?.brand_name}")
+//        Log.d("RecyclerAdapter", "onBindViewholder result: ${listData?.get(position)?.result!![position]?.drug_interactions}")
         holder.bind(listData?.get(position)!!)
     }
 
     override fun getItemCount(): Int {
         if(listData == null) return 0
+        Log.d("RecyclerAdapter", "getItemCount: ${listData!!.size}")
         return listData?.size!!
     }
 
@@ -41,8 +46,8 @@ class RecyclerViewAdapter(): RecyclerView.Adapter<RecyclerViewAdapter.MyViewHold
         val deleteButton = view.delete_button
 
         fun bind(data: MedicationData){
-            nameText.text = data.brand_name
-            descriptionText.text = data.generic_name.toString()
+            nameText.text = data.opendfda!!.brand_name[0]
+            descriptionText.text = data.result[0]?.drug_interactions.toString()
 //            deleteButton.setOnClickListener {
 //                listener.onDeleteCLickListener(data)
 //            }

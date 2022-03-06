@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import com.example.peony.database.entities.MedicationData
 import com.example.peony.database.entities.UserEntity
 
@@ -12,6 +13,7 @@ import com.example.peony.database.entities.UserEntity
     entities = [
         UserEntity::class,
         MedicationData::class], version = 1, exportSchema = false)
+@TypeConverters(Converters::class)
 abstract class AppDatabase: RoomDatabase() {
 
     //define dao inside database
@@ -19,7 +21,6 @@ abstract class AppDatabase: RoomDatabase() {
 
     companion object{
         private var dbInstance: AppDatabase? = null
-
 
         fun getAppDB(context: Context): AppDatabase{
             synchronized(this){
@@ -32,16 +33,5 @@ abstract class AppDatabase: RoomDatabase() {
                }
             }
         }
-
-        //return instance of database
-//        fun getAppDB(context: Context): AppDatabase{
-//            if (dbInstance == null){
-//                dbInstance = Room.databaseBuilder<AppDatabase>(context.applicationContext,
-//                    AppDatabase::class.java, "APPDB")
-//                    .allowMainThreadQueries()
-//                    .build()
-//            }
-//            return dbInstance!!
-//        }
     }
 }
