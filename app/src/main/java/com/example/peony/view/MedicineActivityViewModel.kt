@@ -35,20 +35,13 @@ class MedicineActivityViewModel @Inject constructor(private val repository: Room
 //    }
 
     //after inserting make db call
-//    fun insertUser(userEntity: UserEntity){
-//        repository.insertUser(userEntity)
-//        loadRecords()
-//    }
-//
-//    fun deleteUser(userEntity: UserEntity){
-//        repository.deleteUser(userEntity)
-//        loadRecords()
-//    }
-//
-//    fun deleteAllUsers(){
-//        repository.deleteAllUsers()
-//        loadRecords()
-//    }
+    suspend fun insertMed(medicationData: MedicationData){
+        repository.insertMed(medicationData)
+    }
+
+    suspend fun insertUser(userEntity: UserEntity){
+        repository.insertUser(userEntity)
+    }
 
     fun makeApiCall(query: String) {
         repository.makeApiCall(query)

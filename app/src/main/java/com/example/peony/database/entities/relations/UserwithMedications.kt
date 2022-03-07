@@ -6,11 +6,11 @@ import com.example.peony.database.entities.MedicationData
 import com.example.peony.database.entities.UserEntity
 
 //1-N Relation
-data class UserWithMedication (
+data class UserwithMedications (
     @Embedded val user: UserEntity,
     @Relation(
-        parentColumn = "UserName",
-        entityColumn = "UserName"
+        parentColumn = "userName",
+        entityColumn = "userName"
     )
-    val meds: List<MedicationData>
+    val medicationList: List<MedicationData>
 )

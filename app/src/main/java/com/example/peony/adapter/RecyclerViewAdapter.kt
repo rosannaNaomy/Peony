@@ -10,8 +10,7 @@ import com.example.peony.database.entities.MedicationData
 import com.example.peony.database.entities.UserEntity
 import kotlinx.android.synthetic.main.list_row.view.*
 
-//val listener: RowClickListener
-class RecyclerViewAdapter(): RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder>() {
+class RecyclerViewAdapter(val listener: RowClickListener, val userEntity: UserEntity): RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder>() {
 
     private var listData: List<MedicationData>? = null
     fun setListData(listData: List<MedicationData>?){
@@ -23,7 +22,7 @@ class RecyclerViewAdapter(): RecyclerView.Adapter<RecyclerViewAdapter.MyViewHold
         viewType: Int
     ): RecyclerViewAdapter.MyViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.list_row, parent, false)
-        return MyViewHolder(view)//, listener)
+        return MyViewHolder(view, listener, userEntity)//, listener)
     }
 
     override fun onBindViewHolder(holder: RecyclerViewAdapter.MyViewHolder, position: Int) {
@@ -39,22 +38,26 @@ class RecyclerViewAdapter(): RecyclerView.Adapter<RecyclerViewAdapter.MyViewHold
         return listData?.size!!
     }
 
-    //, val listener: RowClickListener
-    class MyViewHolder(view: View): RecyclerView.ViewHolder(view){
+    class MyViewHolder(view: View, val listener: RowClickListener, val userEntity: UserEntity): RecyclerView.ViewHolder(view){
         val nameText = view.name_textView
         val descriptionText = view.description_textView
-        val deleteButton = view.delete_button
+        val addButton = view.add_imageButton
 
         fun bind(data: MedicationData){
-            nameText.text = data.opendfda!!.brand_name[0]
-            descriptionText.text = data.result[0]?.drug_interactions.toString()
-//            deleteButton.setOnClickListener {
-//                listener.onDeleteCLickListener(data)
-//            }
+            nameText.text = data.opendfda.brand_name[0]
+            if(data.result[0]?.drug_interactions == null){
+                descriptionText.visibility = View.INVISIBLE
+            }else{
+                descriptionText.text = data.result[0]?.drug_interactions.toString()
+            }
+            addButton.setOnClickListener {
+                Log.d("RecyclerAdapter", "setOnClick: inside")
+                listener.onAddMedCLickListener(MedicationData(data.opendfda, data.result, userName = userEntity.userName))
+            }
         }
     }
 
     interface RowClickListener{
-        fun onDeleteCLickListener(userEntity: UserEntity)
+        fun onAddMedCLickListener(medicationData: MedicationData)
     }
 }

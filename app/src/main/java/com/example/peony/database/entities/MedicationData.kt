@@ -9,6 +9,8 @@ import com.example.peony.model.Result
 
 @Entity(tableName = "med")
 data class MedicationData (
-    @PrimaryKey(autoGenerate = true)@ColumnInfo(name = "id")val id: Int = 0,
-    @ColumnInfo(name = "opendfda")val opendfda: Openfda?,
-    @ColumnInfo(name = "result")val result: List<Result?>)
+    @PrimaryKey(autoGenerate = false)
+    @ColumnInfo(name = "opendfda")val opendfda: Openfda,
+    @ColumnInfo(name = "result")val result: List<Result?>,
+    val userName: String
+    )

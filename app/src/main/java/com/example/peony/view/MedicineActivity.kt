@@ -2,8 +2,11 @@ package com.example.peony.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.peony.R
@@ -12,57 +15,66 @@ import com.example.peony.database.entities.MedicationData
 import com.example.peony.database.entities.UserEntity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_medicine.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
-//, RecyclerViewAdapter.RowClickListener
 @AndroidEntryPoint
-class MedicineActivity : AppCompatActivity() {
+class MedicineActivity : AppCompatActivity(), RecyclerViewAdapter.RowClickListener {
     lateinit var viewModel: MedicineActivityViewModel
     private lateinit var recyclerViewAdapter: RecyclerViewAdapter
-
+    private val user = UserEntity("Ms.User")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_medicine)
 
-        //val medicationData = MedicationData(userName = enterDescription_editText.text.toString(),"N/A")
-       // viewModel.insertUser(userEntity)
 
-//        searchButton.setOnClickListener {
-//            //val userEntity = UserEntity(userName = enterDescription_editText.text.toString(),"N/A")
-//            val userEntity = UserEntity(userName = enterDescription_editText.text.toString(),"N/A")
-//            //viewModel.insertUser(userEntity)
-//            enterDescription_editText.setText("")
-//        }
-
-     //   deleteAll_button.setOnClickListener { viewModel.deleteAllUsers() }
         initViewModel()
+        addUser()
         initMainViewModel()
+        search()
     }
 
+    private fun search() {
+        searchButton.setOnClickListener {
+            val searchQuery = enterDescription_editText.text.toString()
+            viewModel.makeApiCall(searchQuery)
+            enterDescription_editText.setText("")
+        }
+    }
+
+    private fun addUser(){
+        CoroutineScope(Dispatchers.IO).launch { viewModel.insertUser(user)}
+    }
 
     private fun initViewModel(){
         viewModel = ViewModelProvider(this).get(MedicineActivityViewModel::class.java)
-        viewModel.makeApiCall("wellbutrin") //pass sample query for api call
         recyclerView.apply{
             layoutManager = LinearLayoutManager(this@MedicineActivity)
 
             val decoration = DividerItemDecoration(applicationContext, DividerItemDecoration.VERTICAL)
             addItemDecoration(decoration)
-            recyclerViewAdapter = RecyclerViewAdapter()//this@MedicineActivity)
+            recyclerViewAdapter = RecyclerViewAdapter(this@MedicineActivity, user)
             adapter = recyclerViewAdapter
         }
     }
 
     private fun initMainViewModel() {
-       // val viewModel = ViewModelProvider(this).get(MedicineActivityViewModel::class.java)
         viewModel.getRecordsObserver().observe(this, Observer<List<MedicationData>> {
             recyclerViewAdapter.setListData(it)
             recyclerViewAdapter.notifyDataSetChanged()
         })
     }
 
-//    override fun onDeleteCLickListener(userEntity: UserEntity) {
-//        viewModel.deleteUser(userEntity)
-//    }
+    override fun onAddMedCLickListener(medicationData: MedicationData) {
+        Log.d("MedicineActivity", "addMeClick: inside")
+
+        lifecycleScope.launch {
+            viewModel.insertMed(medicationData)
+            Log.d("MedicineActivity", "addMeClick: after insert")
+            Toast.makeText(applicationContext, "Added!", Toast.LENGTH_SHORT).show()
+        }
+    }
 
 }

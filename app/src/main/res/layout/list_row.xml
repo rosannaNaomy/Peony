@@ -1,32 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/add_button"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="horizontal">
 
-    <TextView android:id="@+id/name_textView"
+    <TextView
+        android:id="@+id/name_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="sample"
         android:layout_margin="10dp"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:textColor="@color/black"/>
-
-    <TextView android:id="@+id/description_textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:text="sample"
-        android:layout_margin="5dp"
-        android:textSize="16sp"
-        android:maxLines="3"
-        android:textColor="@color/black" />
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
-    <Button
-        android:id="@+id/delete_button"
+    <TextView
+        android:id="@+id/description_textView"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:maxLines="5"
+        android:text="sample"
+        android:textColor="@color/black"
+        android:textSize="10sp" />
+
+    <ImageButton
+        android:id="@+id/add_imageButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:text="Delete"/>
+        android:backgroundTint="@color/purple_500"
+        app:srcCompat="@android:drawable/ic_input_add"
+        android:clickable="true"
+        android:focusable="true"
+        app:tint="@color/white" />
 
 </LinearLayout>
+
+<!--<Button-->
+<!--android:id="@+id/delete_button"-->
+<!--android:layout_width="wrap_content"-->
+<!--android:layout_height="wrap_content"-->
+<!--android:layout_margin="5dp"-->
+<!--android:text="Delete"/>-->
