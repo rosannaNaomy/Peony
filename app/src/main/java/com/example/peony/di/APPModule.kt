@@ -16,7 +16,6 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object APPModule {
-    //  val BASE_URL = "https://api.fda.gov/drug"
     val BASE_URL ="https://api.fda.gov/drug/label.json/"
     val api_key = "Fpg5yQVsUeHIbd2kP6tsw8zA2POUHDk5mdJ50caX"
 
