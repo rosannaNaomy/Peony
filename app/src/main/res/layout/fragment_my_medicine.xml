@@ -8,7 +8,7 @@
     tools:context=".view.fragments.MyMedicineFragment">
 
     <TextView
-        android:id="@+id/headerText_view"
+        android:id="@+id/page_title_Text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
