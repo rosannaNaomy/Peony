@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Peony</string>
-    <string name="editText_Hint">Enter Description</string>
+    <string name="editText_Hint">Enter Medication Name</string>
     <string name="save_button">SAVE</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

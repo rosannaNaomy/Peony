@@ -4,11 +4,13 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import com.example.peony.database.entities.MedicationData
 import com.example.peony.database.entities.UserEntity
+import com.example.peony.model.MedData
 import com.example.peony.network.RetroServiceInterface
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 import org.json.JSONObject
+import retrofit2.Response
 import javax.inject.Inject
 import javax.inject.Named
 
@@ -41,23 +43,35 @@ class RoomRepository @Inject constructor(private val retroServiceInterface: Retr
         val filter = HashMap<String, String>() //Query map
         filter["api_key"] = apiKey
         filter["search"] = searchFieldQuery
-        filter["limit"] = "5"
+        filter["limit"] = "10"
 
         CoroutineScope(IO).launch{
             Log.d("RoomRepository", "Inside Api call, Query: $query")
             val response = retroServiceInterface.getDataFromAPI(filter)
 //            val jObjError = JSONObject(response.errorBody()!!.string()) // returns response errorbody message
             Log.d("RoomRepository", "Error Response: ${response.errorBody()}")
-            if(response.isSuccessful){
-                appDao.deleteAllMeds()
-                Log.d("RoomRepository", "apiCallSuccessful: $response")
-                Log.d("RoomRepository", "Check for data: ${response.body()!!.results.size}")
-//                Log.d("RoomRepository", "Check for data: ${response.body()!!.results[0].drug_interactions[0]}")
-                Log.d("RoomRepository", "Check for data: ${response.body()!!.results[1].openfda.brand_name}")
-                response.body()?.results?.forEach {
-                    insertMed(MedicationData(result = response.body()!!.results, opendfda = it.openfda, userName = "None"))
-                }
-            }
+            checkResponse(response)
+        }
+    }
+
+    private suspend fun checkResponse(response: Response<MedData>){
+        if (response.isSuccessful) {
+            appDao.deleteAllMeds()
+            Log.d("RoomRepository", "apiCallSuccessful: $response")
+            Log.d("RoomRepository", "Check for data: ${response.body()!!.results.size}")
+    //                Log.d("RoomRepository", "Check for data: ${response.body()!!.results[0].drug_interactions[0]}")
+//            Log.d(
+//                "RoomRepository",
+//                "Check for data: ${response.body()!!.results[1].openfda.brand_name}"
+//            )
+            response.body()?.results?.forEach {
+                insertMed(
+                    MedicationData(
+                        result = response.body()!!.results,
+                        opendfda = it.openfda,
+                        userName = "None")) }
+        } else {
+            Log.d("RoomRepository", "Error Response: ${response.errorBody()}")
         }
     }
 }

@@ -12,10 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Peony">
         <activity
-            android:name=".view.DisplayMedicineActivity"
-            android:exported="false" />
-        <activity
             android:name=".view.MedicineActivity"
+            android:parentActivityName=".view.MainActivity"
             android:exported="false" />
         <activity
             android:name=".view.MainActivity"
