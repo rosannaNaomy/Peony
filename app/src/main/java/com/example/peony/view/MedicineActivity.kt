@@ -3,6 +3,7 @@ package com.example.peony.view
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -68,13 +69,14 @@ class MedicineActivity : AppCompatActivity(), RecyclerViewAdapter.RowClickListen
     }
 
     override fun onAddMedCLickListener(medicationData: MedicationData) {
-        Log.d("MedicineActivity", "addMeClick: inside")
-
         lifecycleScope.launch {
             viewModel.insertMed(medicationData)
-            Log.d("MedicineActivity", "addMeClick: after insert")
             Toast.makeText(applicationContext, "Added!", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
     }
 
 }

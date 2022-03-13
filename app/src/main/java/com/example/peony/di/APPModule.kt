@@ -1,12 +1,16 @@
 package com.example.peony.di
 
 import android.app.Application
+import android.content.Context
+import android.content.SharedPreferences
 import com.example.peony.database.AppDao
 import com.example.peony.database.AppDatabase
+import com.example.peony.database.PreferencesHelper
 import com.example.peony.network.RetroServiceInterface
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -25,6 +29,12 @@ object APPModule {
     fun provideApiKey(): String{
         return api_key
     }
+
+    @Provides
+    @Singleton
+    fun provideSharedPreferencesHelper(
+        @ApplicationContext context: Context) = PreferencesHelper(context)
+
 
     @Provides
     @Singleton

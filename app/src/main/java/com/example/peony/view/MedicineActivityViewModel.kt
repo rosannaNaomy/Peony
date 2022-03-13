@@ -43,7 +43,9 @@ class MedicineActivityViewModel @Inject constructor(private val repository: Room
         repository.insertUser(userEntity)
     }
 
-    fun makeApiCall(query: String) {
-        repository.makeApiCall(query)
+    fun makeApiCall(query: String){
+       repository.makeApiCall(query)
     }
+
+
 }

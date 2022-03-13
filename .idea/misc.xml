@@ -8,10 +8,18 @@
         <entry key="app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_baseline_pie_chart_24.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_display_medicine.xml" value="0.33311767578124996" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.176873779296875" />
-        <entry key="app/src/main/res/layout/activity_medicine.xml" value="0.49470825195312507" />
-        <entry key="app/src/main/res/layout/list_row.xml" value="0.2970520019531251" />
-        <entry key="app/src/main/res/layout/med_item.xml" value="0.2998718261718749" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1754638671875" />
+        <entry key="app/src/main/res/layout/activity_medicine.xml" value="0.3804550170898438" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.23802083333333332" />
+        <entry key="app/src/main/res/layout/fragment_insights.xml" value="0.23802083333333332" />
+        <entry key="app/src/main/res/layout/fragment_medicine_info.xml" value="0.2855982241423234" />
+        <entry key="app/src/main/res/layout/fragment_my_medicine.xml" value="0.3839833577473959" />
+        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.2668563842773437" />
+        <entry key="app/src/main/res/layout/list_row.xml" value="0.4150482177734375" />
+        <entry key="app/src/main/res/layout/main_toolbar.xml" value="0.17391304347826086" />
+        <entry key="app/src/main/res/layout/med_item.xml" value="0.30210418701171865" />
+        <entry key="app/src/main/res/layout/my_med_item.xml" value="0.23802083333333332" />
+        <entry key="app/src/main/res/layout/toolbar.xml" value="0.28063659667968754" />
         <entry key="app/src/main/res/menu/nav_menu.xml" value="0.1" />
       </map>
     </option>
