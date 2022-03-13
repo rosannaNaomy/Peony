@@ -6,6 +6,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.example.peony.model.Openfda
 import com.example.peony.model.Result
+import java.io.Serializable
 
 @Entity(tableName = "med")
 data class MedicationData (
@@ -13,4 +14,4 @@ data class MedicationData (
     @ColumnInfo(name = "opendfda")val opendfda: Openfda,
     @ColumnInfo(name = "result")val result: List<Result?>,
     val userName: String
-    )
+    ) : Serializable

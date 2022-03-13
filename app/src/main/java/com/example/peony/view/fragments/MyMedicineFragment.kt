@@ -88,7 +88,7 @@ class MyMedicineFragment : Fragment(), MyMedRecyclerAdapter.RowClickListener {
     }
 
     override fun itemIntereact(medicationData: MedicationData) {
-        fragmentCallbacklistener!!.replaceFragment(medicineInfoFragment)
+        fragmentCallbacklistener!!.passData(medicineInfoFragment, medicationData)
     }
 
 

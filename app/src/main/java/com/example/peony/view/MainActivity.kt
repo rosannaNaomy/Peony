@@ -3,6 +3,7 @@ package com.example.peony.view
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.peony.R
@@ -46,7 +47,10 @@ class MainActivity : AppCompatActivity(), FragmentCallback{
 
     override fun passData(fragment: Fragment, medicationData: MedicationData) {
         val bundle = Bundle()
-        bundle.putParcelable("data", medicationData)
+        bundle.putSerializable("name", medicationData)
+        fragment.arguments = bundle
+        Log.d("Main", bundle.size().toString())
+        Log.d("Main", medicationData.opendfda.brand_name[0])
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.main_fragmentContainer, fragment)
         transaction.commit()
