@@ -1,11 +1,16 @@
 package com.example.peony.view.fragments
 
+import android.content.res.Resources
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.peony.R
+import com.github.mikephil.charting.data.Entry
+import com.github.mikephil.charting.data.LineData
+import com.github.mikephil.charting.data.LineDataSet
+import kotlinx.android.synthetic.main.fragment_insights.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -36,6 +41,32 @@ class InsightsFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_insights, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setLineChart()
+    }
+
+    private fun setLineChart() {
+        val xval = ArrayList<String>()
+        xval.add("11 AM")
+        xval.add("12 AM")
+        xval.add("1 PM")
+        xval.add("3 PM")
+
+        val lineEntry = ArrayList<Entry>()
+        lineEntry.add(Entry(20f, 0f))
+        lineEntry.add(Entry(50f, 1f))
+        lineEntry.add(Entry(60f, 2f))
+        lineEntry.add(Entry(30f, 3f))
+
+        val lineDataSet = LineDataSet(lineEntry, "First")
+        lineDataSet.color = resources.getColor(R.color.purple_200)
+
+        val data = LineData(lineDataSet)
+        insights_linechart.data = data
+        insights_linechart.setBackgroundColor(resources.getColor(R.color.white))
     }
 
     companion object {
