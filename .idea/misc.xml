@@ -11,7 +11,7 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1754638671875" />
         <entry key="app/src/main/res/layout/activity_medicine.xml" value="0.3804550170898438" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.23802083333333332" />
-        <entry key="app/src/main/res/layout/fragment_insights.xml" value="0.23802083333333332" />
+        <entry key="app/src/main/res/layout/fragment_insights.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_medicine_info.xml" value="0.2855982241423234" />
         <entry key="app/src/main/res/layout/fragment_my_medicine.xml" value="0.3839833577473959" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.2668563842773437" />
