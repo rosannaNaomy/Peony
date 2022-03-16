@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.peony.R
 import com.example.peony.adapter.RecyclerViewAdapter
 import com.example.peony.database.entities.MedicationData
+import com.example.peony.database.entities.TempMedData
 import com.example.peony.database.entities.UserEntity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_medicine.*
@@ -62,7 +63,7 @@ class MedicineActivity : AppCompatActivity(), RecyclerViewAdapter.RowClickListen
     }
 
     private fun initMainViewModel() {
-        viewModel.getRecordsObserver().observe(this, Observer<List<MedicationData>> {
+        viewModel.getTempMedsObserver().observe(this, Observer<List<TempMedData>> {
             recyclerViewAdapter.setListData(it)
             recyclerViewAdapter.notifyDataSetChanged()
         })

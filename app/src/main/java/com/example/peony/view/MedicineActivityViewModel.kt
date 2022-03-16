@@ -6,7 +6,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.peony.database.RoomRepository
 import com.example.peony.database.entities.MedicationData
+import com.example.peony.database.entities.TempMedData
 import com.example.peony.database.entities.UserEntity
+import com.example.peony.database.entities.relations.UserwithMedications
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -24,8 +26,16 @@ class MedicineActivityViewModel @Inject constructor(private val repository: Room
 //       // GlobalScope.launch {  loadRecords() }
 //    }
 
+    fun getUserWithMeds(userName: String): LiveData<List<UserwithMedications>>{
+        return repository.getUserWithMeds(userName)
+    }
+
     fun getRecordsObserver(): LiveData<List<MedicationData>>{
         return repository.getMeds()
+    }
+
+    fun getTempMedsObserver(): LiveData<List<TempMedData>>{
+        return repository.getTempMeds()
     }
 
     //call function from repository

@@ -3,7 +3,9 @@ package com.example.peony.database
 import android.util.Log
 import androidx.lifecycle.LiveData
 import com.example.peony.database.entities.MedicationData
+import com.example.peony.database.entities.TempMedData
 import com.example.peony.database.entities.UserEntity
+import com.example.peony.database.entities.relations.UserwithMedications
 import com.example.peony.model.MedData
 import com.example.peony.network.RetroServiceInterface
 import kotlinx.coroutines.CoroutineScope
@@ -25,8 +27,16 @@ class RoomRepository @Inject constructor(private val retroServiceInterface: Retr
         return appDao.getUser()
     }
 
+    fun getUserWithMeds(userName: String): LiveData<List<UserwithMedications>>{
+        return appDao.getUsersWithMedications(userName)
+    }
+
     fun getMeds(): LiveData<List<MedicationData>>{
         return appDao.getMeds()
+    }
+
+    fun getTempMeds(): LiveData<List<TempMedData>>{
+        return appDao.getTempMeds()
     }
 
     //to insert user to our room db
@@ -36,6 +46,10 @@ class RoomRepository @Inject constructor(private val retroServiceInterface: Retr
 
     suspend fun insertMed(medicationData: MedicationData){
          appDao.insertMed(medicationData)
+    }
+
+    suspend fun insertTempMed(tempMedData: TempMedData){
+        appDao.insertTempMed(tempMedData)
     }
 
     fun makeApiCall(query: String){
@@ -56,7 +70,7 @@ class RoomRepository @Inject constructor(private val retroServiceInterface: Retr
 
     private suspend fun checkResponse(response: Response<MedData>){
         if (response.isSuccessful) {
-            appDao.deleteAllMeds()
+            appDao.deleteAllTempMeds()
             Log.d("RoomRepository", "apiCallSuccessful: $response")
             Log.d("RoomRepository", "Check for data: ${response.body()!!.results.size}")
     //                Log.d("RoomRepository", "Check for data: ${response.body()!!.results[0].drug_interactions[0]}")
@@ -65,8 +79,8 @@ class RoomRepository @Inject constructor(private val retroServiceInterface: Retr
 //                "Check for data: ${response.body()!!.results[1].openfda.brand_name}"
 //            )
             response.body()?.results?.forEach {
-                insertMed(
-                    MedicationData(
+                insertTempMed(
+                    TempMedData(
                         result = response.body()!!.results,
                         opendfda = it.openfda,
                         userName = "None")) }

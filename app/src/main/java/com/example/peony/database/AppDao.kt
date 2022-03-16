@@ -5,6 +5,7 @@ import androidx.room.*
 import androidx.room.Dao
 import androidx.room.Insert
 import com.example.peony.database.entities.MedicationData
+import com.example.peony.database.entities.TempMedData
 import com.example.peony.database.entities.UserEntity
 import com.example.peony.database.entities.relations.UserwithMedications
 
@@ -24,12 +25,21 @@ interface AppDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertMed(medicationData: MedicationData)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertTempMed(tempMedData: TempMedData)
+
+    @Query("DELETE FROM tempMed")
+    suspend fun deleteAllTempMeds()
+
+    @Query("SELECT * FROM tempMed")
+    fun getTempMeds(): LiveData<List<TempMedData>>
+
     @Query("DELETE FROM med")
     suspend fun deleteAllMeds()
 
     @Transaction
     @Query("SELECT * FROM user WHERE userName = :userName")
-    fun getUsersWithMedications(userName: String): List<UserwithMedications>
+    fun getUsersWithMedications(userName: String): LiveData<List<UserwithMedications>>
 
     @Query("SELECT * FROM med")
     fun getMeds(): LiveData<List<MedicationData>>
