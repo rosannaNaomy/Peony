@@ -6,13 +6,14 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.example.peony.database.entities.MedicationData
+import com.example.peony.database.entities.TempMedData
 import com.example.peony.database.entities.UserEntity
 
-//, exportSchema = false
 @Database(
     entities = [
         UserEntity::class,
-        MedicationData::class], version = 1, exportSchema = false)
+        MedicationData::class,
+        TempMedData::class], version = 1, exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class AppDatabase: RoomDatabase() {
 

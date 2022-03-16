@@ -13,11 +13,6 @@ import kotlinx.android.synthetic.main.fragment_medicine_info.*
 import kotlinx.android.synthetic.main.fragment_medicine_info.view.*
 import kotlinx.android.synthetic.main.fragment_my_medicine.view.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
 class MedicineInfoFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,8 +37,13 @@ class MedicineInfoFragment : Fragment() {
 
         title.text = medicationData.opendfda.brand_name[0]
         description.text = medicationData.opendfda.generic_name[0]
-        warning.text = medicationData.result[0]?.warnings_and_cautions!![0]
+        warning.text = medicationData.result[0]?.warnings!![0]
 
+//        if(data.result[0]?.drug_interactions == null){
+//            descriptionText.visibility = View.INVISIBLE
+//        }else{
+//            descriptionText.text = data.result[0]?.drug_interactions.toString()
+//        }
     }
 
 }

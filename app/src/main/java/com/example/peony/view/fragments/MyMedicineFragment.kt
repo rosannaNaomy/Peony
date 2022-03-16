@@ -19,6 +19,7 @@ import com.example.peony.adapter.MyMedRecyclerAdapter
 import com.example.peony.adapter.RecyclerViewAdapter
 import com.example.peony.database.entities.MedicationData
 import com.example.peony.database.entities.UserEntity
+import com.example.peony.database.entities.relations.UserwithMedications
 import com.example.peony.view.MainActivity
 import com.example.peony.view.MedicineActivity
 import com.example.peony.view.MedicineActivityViewModel
@@ -74,8 +75,10 @@ class MyMedicineFragment : Fragment(), MyMedRecyclerAdapter.RowClickListener {
     }
 
     private fun initMainViewModel() {
-        viewModel.getRecordsObserver().observe(requireActivity(), Observer<List<MedicationData>> {
-            recyclerViewAdapter.setListData(it)
+        viewModel.getUserWithMeds(user.userName).observe(requireActivity(), Observer<List<UserwithMedications>> {
+            if(it.isNotEmpty()){
+                recyclerViewAdapter.setListData(it[0].medicationList)
+            }
             recyclerViewAdapter.notifyDataSetChanged()
         })
     }

@@ -37,18 +37,11 @@ class MyMedRecyclerAdapter(val listener: RowClickListener, val userEntity: UserE
 
     class MyViewHolder(view: View, val listener: RowClickListener, val userEntity: UserEntity): RecyclerView.ViewHolder(view){
         val nameText = view.medName_textView
-        //        val descriptionText = view.description_textView
         val moreInfoButton = view.moreInfo_button
 
         fun bind(data: MedicationData){
             nameText.text = data.opendfda.brand_name[0]
-//            if(data.result[0]?.drug_interactions == null){
-//                descriptionText.visibility = View.INVISIBLE
-//            }else{
-//                descriptionText.text = data.result[0]?.drug_interactions.toString()
-//            }
             moreInfoButton.setOnClickListener {
-                Log.d("RecyclerAdapter", "setOnClick: inside")
                 listener.itemIntereact(MedicationData(data.opendfda, data.result, userName = userEntity.userName))
             }
         }
